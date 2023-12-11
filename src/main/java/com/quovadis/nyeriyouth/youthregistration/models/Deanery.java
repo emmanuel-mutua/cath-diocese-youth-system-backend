@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 
 public record Deanery(
         @Id
-        Long deaneryId,
+        Integer deaneryId,
         String deaneryName
 ) {
 }

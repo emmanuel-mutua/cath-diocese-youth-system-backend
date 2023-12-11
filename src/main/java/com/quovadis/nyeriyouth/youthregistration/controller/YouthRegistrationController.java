@@ -1,17 +1,15 @@
 package com.quovadis.nyeriyouth.youthregistration.controller;
 
+import com.quovadis.nyeriyouth.youthregistration.models.Deanery;
+import com.quovadis.nyeriyouth.youthregistration.models.Parish;
 import com.quovadis.nyeriyouth.youthregistration.models.Youth;
-import com.quovadis.nyeriyouth.youthregistration.repositories.YouthRegistrationRepo;
-import com.quovadis.nyeriyouth.youthregistration.repositories.YouthRegistrationJdbcTemplate;
+import com.quovadis.nyeriyouth.youthregistration.repositories.*;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.security.PublicKey;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,11 +19,17 @@ import java.util.Optional;
 @RequestMapping("api")
 public class YouthRegistrationController {
     private final YouthRegistrationRepo youthRegistrationRepo;
+    private final ParishRepoJdbcTemplate parishRepo;
+    private final ParishRegistrationRepo parishRegistrationRepo;
+    private final DeaneryRepo deaneryRepo;
     private final YouthRegistrationJdbcTemplate youthRegistrationRepoCustom;
 
 
-    public YouthRegistrationController(YouthRegistrationRepo youthRegistrationRepo, YouthRegistrationJdbcTemplate youthRegistrationRepoCustom) {
+    public YouthRegistrationController(YouthRegistrationRepo youthRegistrationRepo, ParishRepoJdbcTemplate parishRepo, ParishRegistrationRepo parishRegistrationRepo, DeaneryRepo deaneryRepo, YouthRegistrationJdbcTemplate youthRegistrationRepoCustom) {
         this.youthRegistrationRepo = youthRegistrationRepo;
+        this.parishRepo = parishRepo;
+        this.parishRegistrationRepo = parishRegistrationRepo;
+        this.deaneryRepo = deaneryRepo;
         this.youthRegistrationRepoCustom = youthRegistrationRepoCustom;
     }
 
@@ -40,6 +44,19 @@ public class YouthRegistrationController {
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User Not found.")
         ));
     }
+    @GetMapping("/parishes")
+    public List<Parish> findAllParishes(){
+        return parishRegistrationRepo.findAll();
+    }
+    @GetMapping("/deaneries")
+    public List<Deanery> findAllDeaneries(){
+        return deaneryRepo.findAll();
+    }
+    @GetMapping("/parishes/{deanery_id}")
+    public List<Parish> findAllParishesByDeanery(@PathVariable Integer deanery_id){
+        return parishRepo.findAllByDeaneryId(deanery_id);
+    }
+
 
     @GetMapping("/youth/parish/{parishId}")
     public List<Youth> findByParishId(@PathVariable Integer parishId){

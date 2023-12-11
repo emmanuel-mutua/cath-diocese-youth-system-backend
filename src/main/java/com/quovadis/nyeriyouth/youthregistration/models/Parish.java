@@ -4,8 +4,8 @@ import org.springframework.data.annotation.Id;
 
 public record Parish(
         @Id
-        Long parishId,
-        Long deaneryId,
+        Integer parishId,
+        Integer deaneryId,
         String parishName
 
 ) {
