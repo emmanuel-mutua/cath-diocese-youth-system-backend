@@ -4,7 +4,6 @@ import com.quovadis.nyeriyouth.youthregistration.models.Youth;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
@@ -31,7 +30,7 @@ public class YouthRegistrationJdbcTemplate {
         jdbcTemplate.update(sql, idOrBirthCertNumber);
     }
 
-    public boolean validateAdmin(String username, String password) {
+    public boolean validateUser(String username, String password, String userType) {
         String sql = "SELECT password, user_role FROM Userr WHERE username = ?";
         try {
             LoginUser user = jdbcTemplate.queryForObject(sql, (rs, rowNum) -> {
@@ -42,11 +41,20 @@ public class YouthRegistrationJdbcTemplate {
             }, username);
 
             // Check if the provided password matches the stored password
-            return user != null && password.equals(user.getStoredPassword()) && "super_admin".equalsIgnoreCase(user.getRole());
+            if ("admin".equals(userType)){
+                return user != null && password.equals(user.getStoredPassword()) && "super_admin".equalsIgnoreCase(user.getRole());
+            }else {
+                return user != null && password.equals(user.getStoredPassword()) && "parish_admin".equalsIgnoreCase(user.getRole());
+            }
         } catch (EmptyResultDataAccessException e) {
             // Handle invalid username
             return false;
         }
+    }
+
+    public boolean checkIfExists(String idNumber) {
+        String sql = "SELECT id_or_birth_cert_number FROM Youth WHERE id_or_birth_cert_number = ?";
+        return true;
     }
 }
  class LoginUser {
