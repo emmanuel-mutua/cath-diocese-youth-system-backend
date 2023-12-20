@@ -1,4 +1,17 @@
-    CREATE TABLE IF NOT EXISTS Youth (
+
+CREATE TABLE IF NOT EXISTS Deanery(
+deanery_Id SERIAL PRIMARY KEY,
+deanery_name VARCHAR(20)
+    );
+
+CREATE TABLE IF NOT EXISTS Parish(
+parish_id SERIAL PRIMARY KEY,
+deanery_id INTEGER,
+parish_name VARCHAR(20),
+FOREIGN KEY (deanery_id) REFERENCES Deanery(deanery_Id)
+    );
+
+CREATE TABLE IF NOT EXISTS Youth (
         serial_number SERIAL PRIMARY KEY,
         full_name VARCHAR(255) NOT NULL,
         date_of_birth DATE NOT NULL,
@@ -17,17 +30,6 @@
         FOREIGN KEY (parish_id) REFERENCES Parish(parish_id)
         );
 
-    CREATE TABLE IF NOT EXISTS Deanery(
-        deanery_Id SERIAL PRIMARY KEY,
-        deanery_name VARCHAR(20)
-        );
-
-    CREATE TABLE IF NOT EXISTS Parish(
-        parish_id SERIAL PRIMARY KEY,
-        deanery_id INTEGER,
-        parish_name VARCHAR(20),
-        FOREIGN KEY (deanery_id) REFERENCES Deanery(deanery_Id)
-        );
 
     CREATE TABLE IF NOT EXISTS Userr (
     user_id SERIAL PRIMARY KEY,

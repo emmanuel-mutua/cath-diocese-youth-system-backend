@@ -41,6 +41,7 @@ public class DataLoader implements CommandLineRunner {
 //                parishRegistrationRepo.saveAll(objectMapper.readValue(inputStream,new TypeReference<List<Parish>>(){} ));
 //            }
 //        }
+//                parishRegistrationRepo.deleteAll();
 
     }
 }
