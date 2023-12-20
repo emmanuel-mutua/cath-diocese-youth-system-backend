@@ -14,7 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.*;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:3001", "http://172.16.41.16:3000"})
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:3001", "http://172.16.41.16:3000", "https://790e-41-89-227-171.ngrok-free.app"})
 @RequestMapping("api")
 public class YouthRegistrationController {
     private final YouthRegistrationRepo youthRegistrationRepo;
