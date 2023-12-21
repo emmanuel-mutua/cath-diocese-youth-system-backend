@@ -1,9 +1,6 @@
 package com.quovadis.nyeriyouth.youthregistration.controller;
 
-import com.quovadis.nyeriyouth.youthregistration.models.Deanery;
-import com.quovadis.nyeriyouth.youthregistration.models.Parish;
-import com.quovadis.nyeriyouth.youthregistration.models.Userr;
-import com.quovadis.nyeriyouth.youthregistration.models.Youth;
+import com.quovadis.nyeriyouth.youthregistration.models.*;
 import com.quovadis.nyeriyouth.youthregistration.repositories.*;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -23,22 +20,27 @@ public class YouthRegistrationController {
     private final DeaneryRepo deaneryRepo;
     private final YouthRegistrationJdbcTemplate youthRegistrationRepoCustom;
     private final AdminRepo adminRepo;
+    private final ParishAdminRepo parishAdminRepo;
 
 
-    public YouthRegistrationController(YouthRegistrationRepo youthRegistrationRepo, ParishRepoJdbcTemplate parishRepo, ParishRegistrationRepo parishRegistrationRepo, DeaneryRepo deaneryRepo, YouthRegistrationJdbcTemplate youthRegistrationRepoCustom, AdminRepo adminRepo) {
+    public YouthRegistrationController(YouthRegistrationRepo youthRegistrationRepo, ParishRepoJdbcTemplate parishRepo, ParishRegistrationRepo parishRegistrationRepo, DeaneryRepo deaneryRepo, YouthRegistrationJdbcTemplate youthRegistrationRepoCustom, AdminRepo adminRepo, ParishAdminRepo parishAdminRepo) {
         this.youthRegistrationRepo = youthRegistrationRepo;
         this.parishRepo = parishRepo;
         this.parishRegistrationRepo = parishRegistrationRepo;
         this.deaneryRepo = deaneryRepo;
         this.youthRegistrationRepoCustom = youthRegistrationRepoCustom;
         this.adminRepo = adminRepo;
+        this.parishAdminRepo = parishAdminRepo;
     }
 
     @GetMapping("/youth")
     public List<Youth> findAllYouths(){
         return youthRegistrationRepo.findAll();
     }
-
+    @GetMapping("/users")
+    public List<Userr> getAllAdmins(){
+        return adminRepo.findAll();
+    }
     @GetMapping("youth/{id}")
     public Optional<Youth>findYouthById(@PathVariable Integer id){
         return Optional.ofNullable(youthRegistrationRepo.findById(id).orElseThrow(
@@ -85,6 +87,25 @@ public class YouthRegistrationController {
         }
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/addUser")
+    public void addUser(@Valid @RequestBody Userr userr){
+        if (adminRepo.findAllByUsername(userr.username()).isEmpty()){
+            adminRepo.save(userr);
+        }else {
+            throw new ResponseStatusException(HttpStatus.FOUND, "User Exists");
+        }
+    }
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/addParishAdmin")
+    public void addParishAdmin(@Valid @RequestBody ParishAdmin parishAdmin){
+        if (parishAdminRepo.findAllByParishId(parishAdmin.parishId()).isEmpty()){
+            parishAdminRepo.save(parishAdmin);
+        }else {
+            throw new ResponseStatusException(HttpStatus.FOUND, "Admin Exists");
+        }
+    }
+
     @PutMapping("/youth/{id}")
     public void updateYouthData(@Valid @RequestBody Youth nyeriYouth, @PathVariable Integer id){
         if (!youthRegistrationRepo.existsById(id)){
@@ -97,18 +118,5 @@ public class YouthRegistrationController {
     public void deleteYouth(@PathVariable String idOrBirthCertNumber){
         youthRegistrationRepoCustom.deleteYouthByCertOrIdNumber(idOrBirthCertNumber);
     }
-    @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/addUser")
-    public void addUser(@Valid @RequestBody Userr userr){
-        if (adminRepo.findAllByUsername(userr.username()).isEmpty()){
-            adminRepo.save(userr);
-        }else {
-            throw new ResponseStatusException(HttpStatus.FOUND, "User Exists");
-        }
-    }
 
-    @GetMapping("/users")
-    public List<Userr> getAllAdmins(){
-        return adminRepo.findAll();
-    }
 }
