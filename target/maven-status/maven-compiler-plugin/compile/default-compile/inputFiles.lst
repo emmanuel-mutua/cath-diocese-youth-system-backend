@@ -5,11 +5,13 @@ C:\Users\Emmanuel Mutua\nyeriyouth\BackEnd\nyeriyouth\src\main\java\com\quovadis
 C:\Users\Emmanuel Mutua\nyeriyouth\BackEnd\nyeriyouth\src\main\java\com\quovadis\nyeriyouth\youthregistration\repositories\YouthRegistrationRepo.java
 C:\Users\Emmanuel Mutua\nyeriyouth\BackEnd\nyeriyouth\src\main\java\com\quovadis\nyeriyouth\youthregistration\config\SecurityConfig.java
 C:\Users\Emmanuel Mutua\nyeriyouth\BackEnd\nyeriyouth\src\main\java\com\quovadis\nyeriyouth\youthregistration\models\Userr.java
+C:\Users\Emmanuel Mutua\nyeriyouth\BackEnd\nyeriyouth\src\main\java\com\quovadis\nyeriyouth\youthregistration\repositories\ParishAdminRepo.java
 C:\Users\Emmanuel Mutua\nyeriyouth\BackEnd\nyeriyouth\src\main\java\com\quovadis\nyeriyouth\youthregistration\repositories\ParishRepoJdbcTemplate.java
 C:\Users\Emmanuel Mutua\nyeriyouth\BackEnd\nyeriyouth\src\main\java\com\quovadis\nyeriyouth\youthregistration\repositories\ParishRegistrationRepo.java
 C:\Users\Emmanuel Mutua\nyeriyouth\BackEnd\nyeriyouth\src\main\java\com\quovadis\nyeriyouth\youthregistration\repositories\AdminRepo.java
 C:\Users\Emmanuel Mutua\nyeriyouth\BackEnd\nyeriyouth\src\main\java\com\quovadis\nyeriyouth\youthregistration\config\ApiKeyAuthFilter.java
 C:\Users\Emmanuel Mutua\nyeriyouth\BackEnd\nyeriyouth\src\main\java\com\quovadis\nyeriyouth\youthregistration\controller\YouthRegistrationController.java
+C:\Users\Emmanuel Mutua\nyeriyouth\BackEnd\nyeriyouth\src\main\java\com\quovadis\nyeriyouth\youthregistration\models\ParishAdmin.java
 C:\Users\Emmanuel Mutua\nyeriyouth\BackEnd\nyeriyouth\src\main\java\com\quovadis\nyeriyouth\youthregistration\repositories\YouthRegistrationJdbcTemplate.java
 C:\Users\Emmanuel Mutua\nyeriyouth\BackEnd\nyeriyouth\src\main\java\com\quovadis\nyeriyouth\youthregistration\repositories\DeaneryRepo.java
 C:\Users\Emmanuel Mutua\nyeriyouth\BackEnd\nyeriyouth\src\main\java\com\quovadis\nyeriyouth\NyeriyouthApplication.java
