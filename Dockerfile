@@ -1,4 +1,4 @@
-FROM openjdk:17-jdk-alpine
+FROM openjdk:21
 WORKDIR /app
 COPY target/nyeriyouth-0.0.1-SNAPSHOT.jar nyeriyouth.jar
 EXPOSE 8080

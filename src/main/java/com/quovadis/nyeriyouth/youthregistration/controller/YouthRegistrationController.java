@@ -4,6 +4,7 @@ import com.quovadis.nyeriyouth.youthregistration.models.*;
 import com.quovadis.nyeriyouth.youthregistration.repositories.*;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -76,14 +77,34 @@ public class YouthRegistrationController {
     public ResponseEntity<Map<String, String>> loginAdmin(@RequestBody Map<String,Object> userMap, @PathVariable String userType){
         String username = (String) userMap.get("username");
         String password = (String) userMap.get("password");
-        boolean ok = youthRegistrationRepoCustom.validateUser(username,password,userType);
         Map<String, String> map = new HashMap<>();
-        if (ok){
-            map.put("message", "Login Success");
-            return new ResponseEntity<>(map, HttpStatus.OK);
+        if ("admin".equals(userType)){
+            boolean ok = youthRegistrationRepoCustom.validateUser(username,password,userType);
+
+            if (ok){
+                map.put("message", "Login Success");
+                return new ResponseEntity<>(map, HttpStatus.OK);
+            }else {
+                map.put("message", "Invalid username/password");
+                return new ResponseEntity<>(map, HttpStatus.NOT_FOUND);
+            }
         }else {
-            map.put("message", "Invalid username/password");
-            return new ResponseEntity<>(map, HttpStatus.NOT_FOUND);
+            Optional<ParishAdmin> parishAdmin = parishAdminRepo.findParishAdminByUsername(username);
+            if (parishAdmin.isPresent()){
+                Integer parishId = parishAdmin.get().parishId();
+                String parishAdminPwd = parishAdmin.get().password();
+                if (!password.equals(parishAdminPwd)){
+                    map.put("message", "Invalid username/password");
+                    return new ResponseEntity<>(map, HttpStatus.NOT_FOUND);
+                }else {
+                    map.put("message", "Login Success");
+                    map.put("parishId", "" + parishId);
+                    return new ResponseEntity<>(map, HttpStatus.OK);
+                }
+            }else {
+                map.put("message", "Invalid username/password");
+                return new ResponseEntity<>(map, HttpStatus.NOT_FOUND);
+            }
         }
     }
 
@@ -99,10 +120,18 @@ public class YouthRegistrationController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/addParishAdmin")
     public void addParishAdmin(@Valid @RequestBody ParishAdmin parishAdmin){
-        if (parishAdminRepo.findAllByParishId(parishAdmin.parishId()).isEmpty()){
+        Boolean adminExistsByParishId= parishAdminRepo.findAllByParishId(parishAdmin.parishId()).isEmpty();
+        Boolean adminExistsByUserName = parishAdminRepo.findAllByUsername(parishAdmin.username()).isEmpty();
+        if (!adminExistsByParishId) {
+            throw new ResponseStatusException(HttpStatus.FOUND, "Parish Admin Exists in the selected parish");
+        }
+        if (!adminExistsByUserName){
+            throw new ResponseStatusException(HttpStatus.FOUND, "UserName taken");
+        }
+        try {
             parishAdminRepo.save(parishAdmin);
-        }else {
-            throw new ResponseStatusException(HttpStatus.FOUND, "Admin Exists");
+        }catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
 

@@ -5,7 +5,7 @@ import org.springframework.data.annotation.Id;
 public record ParishAdmin(
         @Id
         Integer id,
-        String userName,
+        String username,
         Integer parishId,
         String password
 ) {

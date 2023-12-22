@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS Youth (
         user_role VARCHAR(20) NOT NULL
         );
 
-    CREATE TABLE IF NOT EXISTS ParishAdmin (
+    CREATE TABLE IF NOT EXISTS parish_admin (
         id SERIAL PRIMARY KEY,
         username VARCHAR(20) NOT NULL,
         parish_id INTEGER NOT NULL,
