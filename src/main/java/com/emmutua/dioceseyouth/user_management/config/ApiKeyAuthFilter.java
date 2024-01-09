@@ -1,4 +1,4 @@
-package com.quovadis.nyeriyouth.youthregistration.config;
+package com.emmutua.dioceseyouth.user_management.config;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

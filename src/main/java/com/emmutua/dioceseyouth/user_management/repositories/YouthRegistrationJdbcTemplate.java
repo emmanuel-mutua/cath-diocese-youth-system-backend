@@ -1,6 +1,6 @@
-package com.quovadis.nyeriyouth.youthregistration.repositories;
+package com.emmutua.dioceseyouth.user_management.repositories;
 
-import com.quovadis.nyeriyouth.youthregistration.models.Youth;
+import com.emmutua.dioceseyouth.user_management.models.Youth;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;

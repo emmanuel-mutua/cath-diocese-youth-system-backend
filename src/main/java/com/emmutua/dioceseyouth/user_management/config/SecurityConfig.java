@@ -1,4 +1,4 @@
-package com.quovadis.nyeriyouth.youthregistration.config;
+package com.emmutua.dioceseyouth.user_management.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

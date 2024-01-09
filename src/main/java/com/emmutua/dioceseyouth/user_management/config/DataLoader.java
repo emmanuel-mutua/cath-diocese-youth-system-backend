@@ -1,17 +1,11 @@
-package com.quovadis.nyeriyouth.youthregistration.config;
+package com.emmutua.dioceseyouth.user_management.config;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.quovadis.nyeriyouth.youthregistration.models.Deanery;
-import com.quovadis.nyeriyouth.youthregistration.models.Parish;
-import com.quovadis.nyeriyouth.youthregistration.repositories.DeaneryRepo;
-import com.quovadis.nyeriyouth.youthregistration.repositories.ParishRegistrationRepo;
-import com.quovadis.nyeriyouth.youthregistration.repositories.YouthRegistrationRepo;
+import com.emmutua.dioceseyouth.user_management.repositories.DeaneryRepo;
+import com.emmutua.dioceseyouth.user_management.repositories.ParishRegistrationRepo;
+import com.emmutua.dioceseyouth.user_management.repositories.YouthRegistrationRepo;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
-import java.io.InputStream;
-import java.util.List;
 
 @Component
 public class DataLoader implements CommandLineRunner {

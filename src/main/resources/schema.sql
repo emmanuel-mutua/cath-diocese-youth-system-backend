@@ -44,5 +44,5 @@ CREATE TABLE IF NOT EXISTS Youth (
         parish_id INTEGER NOT NULL,
         password VARCHAR(20) NOT NULL
     );
-
+--     INSERT INTO Userr (username, password, user_role) VALUES ('xxx','xxx','super_admin')
 

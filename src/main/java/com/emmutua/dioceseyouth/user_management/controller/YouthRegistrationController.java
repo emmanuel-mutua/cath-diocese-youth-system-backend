@@ -1,10 +1,9 @@
-package com.quovadis.nyeriyouth.youthregistration.controller;
+package com.emmutua.dioceseyouth.user_management.controller;
 
-import com.quovadis.nyeriyouth.youthregistration.models.*;
-import com.quovadis.nyeriyouth.youthregistration.repositories.*;
+import com.emmutua.dioceseyouth.user_management.models.*;
+import com.emmutua.dioceseyouth.user_management.repositories.*;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -12,7 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.*;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:3001", "http://172.16.41.16:3000", "https://790e-41-89-227-171.ngrok-free.app"})
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:3001", "https://adnyeriyouth-1t5nyd1d9-youthmanagementnyeri.vercel.app", "https://adnyeriyouth.vercel.app"})
 @RequestMapping("api")
 public class YouthRegistrationController {
     private final YouthRegistrationRepo youthRegistrationRepo;

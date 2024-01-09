@@ -1,4 +1,4 @@
-package com.quovadis.nyeriyouth.youthregistration.models;
+package com.emmutua.dioceseyouth.user_management.models;
 
 import org.springframework.data.annotation.Id;
 import java.time.LocalDate;

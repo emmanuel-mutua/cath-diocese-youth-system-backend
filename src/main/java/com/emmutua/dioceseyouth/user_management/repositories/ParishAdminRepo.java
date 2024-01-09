@@ -1,6 +1,6 @@
-package com.quovadis.nyeriyouth.youthregistration.repositories;
+package com.emmutua.dioceseyouth.user_management.repositories;
 
-import com.quovadis.nyeriyouth.youthregistration.models.ParishAdmin;
+import com.emmutua.dioceseyouth.user_management.models.ParishAdmin;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
 
