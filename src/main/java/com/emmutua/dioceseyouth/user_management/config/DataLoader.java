@@ -1,22 +1,22 @@
 package com.emmutua.dioceseyouth.user_management.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.emmutua.dioceseyouth.user_management.repositories.DeaneryRepo;
 import com.emmutua.dioceseyouth.user_management.repositories.ParishRegistrationRepo;
-import com.emmutua.dioceseyouth.user_management.repositories.YouthRegistrationRepo;
+import com.emmutua.dioceseyouth.user_management.repositories.YouthRegistration;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
 public class DataLoader implements CommandLineRunner {
 
-    private final YouthRegistrationRepo youthRegistrationRepo;
+    private final YouthRegistration youthRegistrationRepo;
     private final ParishRegistrationRepo parishRegistrationRepo;
     private final DeaneryRepo deaneryRepo;
     private final ObjectMapper objectMapper;
 
 
-    public DataLoader(YouthRegistrationRepo youthRegistrationRepo, ParishRegistrationRepo parishRegistrationRepo, DeaneryRepo deaneryRepo, ObjectMapper objectMapper) {
+    public DataLoader(YouthRegistration youthRegistrationRepo, ParishRegistrationRepo parishRegistrationRepo, DeaneryRepo deaneryRepo, ObjectMapper objectMapper) {
         this.youthRegistrationRepo = youthRegistrationRepo;
         this.parishRegistrationRepo = parishRegistrationRepo;
         this.deaneryRepo = deaneryRepo;

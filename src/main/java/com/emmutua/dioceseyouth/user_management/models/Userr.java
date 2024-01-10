@@ -1,12 +1,24 @@
 package com.emmutua.dioceseyouth.user_management.models;
 
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-public record Userr(
+@Entity
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+public class Userr{
         @Id
-        Integer userId,
-        String username,
-        String password,
-        String userRole
-) {
-}
+        @GeneratedValue
+        @Column(name = "userId")
+        Long id;
+        String username;
+        String password;
+        String userRole;
+        }
+

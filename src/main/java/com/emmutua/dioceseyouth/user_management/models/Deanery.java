@@ -1,10 +1,22 @@
 package com.emmutua.dioceseyouth.user_management.models;
 
-import org.springframework.data.annotation.Id;
 
-public record Deanery(
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+public class Deanery{
         @Id
-        Integer deaneryId,
-        String deaneryName
-) {
-}
+        @GeneratedValue
+        @Column(name = "deaneryId")
+        Integer id;
+        String deaneryName;
+        }
